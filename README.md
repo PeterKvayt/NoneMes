@@ -6,3 +6,5 @@
 /tests - there is all tests for project.
 
 [PN].sln - project solution.
+
+.gitignore
