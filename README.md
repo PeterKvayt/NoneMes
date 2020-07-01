@@ -8,3 +8,5 @@
 [PN].sln - project solution.
 
 .gitignore
+
+README.md
