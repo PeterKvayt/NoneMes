@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoMessage", "src\NoMessage\NoMessage.csproj", "{C89BECB2-3873-4E99-88AE-B46913BD59C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "src\NoMessage\API.csproj", "{C89BECB2-3873-4E99-88AE-B46913BD59C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationCore", "src\ApplicationCore\ApplicationCore.csproj", "{127E0F4A-B136-4A5A-919F-A06E9EAC79C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\ApplicationCore\Core.csproj", "{127E0F4A-B136-4A5A-919F-A06E9EAC79C1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{FD512395-EC3A-4F8A-B7BA-9DB10EE9E765}"
 EndProject

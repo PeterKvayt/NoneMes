@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using ApplicationCore.Identity;
+using Core.Identity;
 using Infrastructure.Data;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace NoMessage
+namespace API
 {
     public class Program
     {

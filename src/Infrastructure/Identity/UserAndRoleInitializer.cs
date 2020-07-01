@@ -1,4 +1,4 @@
-﻿using ApplicationCore.Identity;
+﻿using Core.Identity;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace NoMessage.ViewModels
+namespace API.ViewModels
 {
     public sealed class MessageViewModel
     {

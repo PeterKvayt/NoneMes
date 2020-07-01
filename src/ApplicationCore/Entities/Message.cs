@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ApplicationCore.Entities
+namespace Core.Entities
 {
     public sealed class Message
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace ApplicationCore.Entities
+namespace Core.Entities
 {
     public sealed class MessageRecipient
     {

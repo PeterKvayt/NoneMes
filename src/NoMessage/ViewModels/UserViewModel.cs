@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NoMessage.ViewModels
+namespace API.ViewModels
 {
     public sealed class UserViewModel
     {
