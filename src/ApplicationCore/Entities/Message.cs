@@ -2,8 +2,9 @@
 
 namespace ApplicationCore.Entities
 {
-    public class Message: BaseEntity
+    public sealed class Message
     {
+        public int Id { get; set; }
         public string FromUserId { get; set; }
         public DateTime DateSent { get; set; }
         public DateTime DateRead { get; set; }
