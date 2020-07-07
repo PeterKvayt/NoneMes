@@ -1,7 +1,28 @@
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+.nav-box{
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1; 
+  top: 0;
+  left: 0;
+  background-color: var(--dark-background); 
+  overflow-x: hidden;  
+  padding-top: 1rem;
+}
+
+.nav-item{
+  font-weight: 700;
+  display: block;
+  margin: 0;
+  width: 100%;
+  padding: 1rem;
+  color: var(--card-headline)
+}
+.nav-item:hover{
+  color: var(--background);
+  background-color: var(--sub-headline);
+  cursor: pointer;
+  text-decoration: none;
 }
 
 html {
