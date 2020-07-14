@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { InputText } from './InputText';
+import { InputText } from '../../component-elements/InputText';
 
 @Component({
   selector: 'app-input-text',
