@@ -2,13 +2,24 @@
 
     <label class="control-label">{{item.label}}</label>
   
-    <input 
-      type='text' 
+    <input *ngIf='item.max !== undefined; else noMax'
+      type='text'
+      [placeholder]='item.label' 
       [maxLength]='item.max' 
       [minLength]='item.min' 
       [ngModel]='item.value' 
       (ngModelChange)='onValueChange($event)' 
       class="form-control" />
+    
+    <ng-template #noMax>
+      <input 
+      type='text'
+      [placeholder]='item.label' 
+      [minLength]='item.min' 
+      [ngModel]='item.value' 
+      (ngModelChange)='onValueChange($event)' 
+      class="form-control" />
+    </ng-template>
   
     <span *ngIf='!item.valid' class="text-danger">{{item.errorText}}</span>
   

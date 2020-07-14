@@ -13,8 +13,8 @@ export class InputTextComponent implements OnInit {
   @Output() valueChange = new EventEmitter<InputText>();
 
   public onValueChange(value: string): void {
-      this.item.value = value;
-      this.valueChange.emit(this.item);
+    this.item.value = value;
+    this.valueChange.emit(this.item);
   }
 
   public ngOnInit(): void {

@@ -15,8 +15,7 @@ export class LoginComponent implements OnInit {
 
   public passwordInput: InputText = {
     label: 'Password',
-    errorText: 'Invalid password.',
-    min: 8
+    errorText: 'Invalid password.'
   };
 
   public ngOnInit(): void {
