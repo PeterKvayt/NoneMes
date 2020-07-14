@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InputText } from 'src/app/component-elements/InputText';
 
 @Component({
   selector: 'app-registration',
@@ -7,7 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  public emailInput: InputText = {
+    label: 'Email',
+    errorText: 'Invalid email.'
+  };
+
+  public loginInput: InputText = {
+    label: 'Login',
+    errorText: 'Invalid login.'
+  };
+
+  public passwordInput: InputText = {
+    label: 'Password',
+    errorText: 'Invalid password.'
+  };
+
+  public repitPasswordInput: InputText = {
+    label: 'Repit password',
+    errorText: 'Not match.'
+  };
 
   ngOnInit() {
   }
