@@ -11,13 +11,15 @@ import { InputTextComponent } from './components/input-text/input-text.component
 // Views.
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
+import { RegistrationComponent } from './views/registration/registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     LoginComponent,
-    InputTextComponent
+    InputTextComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -25,6 +27,8 @@ import { LoginComponent } from './views/login/login.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent, pathMatch: 'full' },
+      { path: 'login', component: LoginComponent, pathMatch: 'full' },
+      { path: 'registration', component: RegistrationComponent },
       { path: '**', component: LoginComponent }
     ])
   ],
