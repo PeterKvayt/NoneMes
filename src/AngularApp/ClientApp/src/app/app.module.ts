@@ -4,23 +4,28 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+// Components.
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { InputTextComponent } from './components/input-text/input-text.component';
 
+// Views.
 import { AppComponent } from './app.component';
-import { HomeComponent } from './views/home/home.component';
+import { LoginComponent } from './views/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent
+    LoginComponent,
+    InputTextComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' }
+      { path: '', component: LoginComponent, pathMatch: 'full' },
+      { path: '**', component: LoginComponent }
     ])
   ],
   providers: [],
