@@ -1,0 +1,39 @@
+<div class="row">
+
+  <div class="col-lg-2">
+    <app-nav-menu [items]='navItems'></app-nav-menu>
+  </div>
+
+  <div class="col-lg-6 mt-4 offset-lg-2">
+
+    <div class="conversation-title">
+      Conversation with Jonh Doe
+    </div>
+
+    <div class="message-box">
+    <ng-container *ngFor='let message of messages'>
+
+        <div 
+          [class.own-message-wrapper]='message.owner'>
+          <div class="message">
+            {{message.text}}
+          <span class="message-time">{{message.time}}</span>
+          </div>
+
+        </div>
+
+      </ng-container>
+    </div>
+
+    <div class="dashboard-box">
+      <div class="input-group">
+        <input class="form-control" placeholder="Tap message..." aria-describedby="button-send"/>
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" id="button-send">Send</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

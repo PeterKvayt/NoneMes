@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegistrationComponent } from './views/registration/registration.component';
 import { MessagesComponent } from './views/messages/messages.component';
+import { ConversationComponent } from './views/conversation/conversation.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MessagesComponent } from './views/messages/messages.component';
     LoginComponent,
     InputTextComponent,
     RegistrationComponent,
-    MessagesComponent
+    MessagesComponent,
+    ConversationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -31,7 +33,8 @@ import { MessagesComponent } from './views/messages/messages.component';
       { path: '', component: LoginComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent, pathMatch: 'full' },
       { path: 'registration', component: RegistrationComponent },
-      { path: 'conversations', component: MessagesComponent },
+      { path: 'messages', component: MessagesComponent },
+      { path: 'conversation', component: ConversationComponent },
       { path: '**', component: LoginComponent }
     ])
   ],
