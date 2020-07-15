@@ -3,11 +3,15 @@
   padding: 10px 10px;
   border-radius: 5px;
   display: block;
-  color: var(--card-headline);
-  background-color: var(--dark-background);
+  color: var(--sub-headline);
+  background-color: var(--ligth-background);
   font-weight: 300;
 }
 .conversation-box:hover{
   cursor: pointer;
-  background-color: var(--sub-headline);
+}
+
+.title{
+  font-weight: 700;
+  color: var(--dark-background);
 }

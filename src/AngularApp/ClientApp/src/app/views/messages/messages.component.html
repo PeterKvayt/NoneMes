@@ -2,8 +2,8 @@
   <div class="col-lg-2">
     <app-nav-menu [items]='navItems'></app-nav-menu>
   </div>
-  <div class="col-lg-6">
-    <h5>Conversations</h5>
+  <div class="col-lg-6 mt-4 offset-lg-2">
+    <h5 class="title mb-4">Conversations</h5>
     <ng-container *ngFor='let conversation of messageItems'>
       <div [routerLink]='conversation.reference' class="conversation-box">
         {{conversation.userName}}
