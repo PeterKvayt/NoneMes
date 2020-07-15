@@ -12,6 +12,7 @@ import { InputTextComponent } from './components/input-text/input-text.component
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegistrationComponent } from './views/registration/registration.component';
+import { ConversationsComponent } from './views/conversations/conversations.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RegistrationComponent } from './views/registration/registration.compone
     NavMenuComponent,
     LoginComponent,
     InputTextComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ConversationsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +31,7 @@ import { RegistrationComponent } from './views/registration/registration.compone
       { path: '', component: LoginComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent, pathMatch: 'full' },
       { path: 'registration', component: RegistrationComponent },
+      { path: 'conversations', component: ConversationsComponent },
       { path: '**', component: LoginComponent }
     ])
   ],
