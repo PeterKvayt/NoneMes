@@ -3,11 +3,11 @@ import { NavMenuItem } from 'src/app/component-elements/NavMenuItem';
 import { ConversationItem } from 'src/app/component-elements/ConversationItem';
 
 @Component({
-  selector: 'app-conversations',
-  templateUrl: './conversations.component.html',
-  styleUrls: ['./conversations.component.css']
+  selector: 'app-messages',
+  templateUrl: './messages.component.html',
+  styleUrls: ['./messages.component.css']
 })
-export class ConversationsComponent implements OnInit {
+export class MessagesComponent implements OnInit {
 
   constructor() { }
 
@@ -16,7 +16,7 @@ export class ConversationsComponent implements OnInit {
   ];
 
   // Mock elements.
-  public conversationItems = [
+  public messageItems = [
     new ConversationItem('John Doe 1', '1'),
     new ConversationItem('John Doe 2', '2'),
     new ConversationItem('John Doe 3', '3'),

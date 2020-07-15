@@ -4,7 +4,7 @@
   </div>
   <div class="col-lg-6">
     <h5>Conversations</h5>
-    <ng-container *ngFor='let conversation of conversationItems'>
+    <ng-container *ngFor='let conversation of messageItems'>
       <div [routerLink]='conversation.reference' class="conversation-box">
         {{conversation.userName}}
       </div>
