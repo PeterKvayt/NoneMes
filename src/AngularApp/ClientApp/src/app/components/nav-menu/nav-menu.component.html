@@ -1,4 +1,5 @@
 <nav class="nav-box">
-    <a class="nav-item" href="#">Settings</a>
-    <a class="nav-item" href="#">Logout</a>
+    <ng-container *ngFor='let item of items'>
+    <a class="nav-item" [href]='item.reference'>{{item.value}}</a>
+    </ng-container>
 </nav>

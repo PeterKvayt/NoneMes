@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavMenuItem } from 'src/app/component-elements/NavMenuItem';
 
 @Component({
   selector: 'app-conversations',
@@ -8,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class ConversationsComponent implements OnInit {
 
   constructor() { }
+
+  public navItems = [
+    new NavMenuItem('Logout', '#')
+  ];
 
   ngOnInit() {
   }
