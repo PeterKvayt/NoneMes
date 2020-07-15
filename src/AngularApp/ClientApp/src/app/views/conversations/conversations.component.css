@@ -1,0 +1,13 @@
+.conversation-box{
+  margin-top: 5px;
+  padding: 10px 10px;
+  border-radius: 5px;
+  display: block;
+  color: var(--card-headline);
+  background-color: var(--dark-background);
+  font-weight: 300;
+}
+.conversation-box:hover{
+  cursor: pointer;
+  background-color: var(--sub-headline);
+}
