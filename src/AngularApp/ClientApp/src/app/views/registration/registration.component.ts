@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { InputText } from 'src/app/componentClasses/InputText';
 import { UserRegisterService } from 'src/app/services/UserRegisterService';
 import { InputPassword } from 'src/app/componentClasses/InputPassword';
+import { BaseView } from 'src/app/BaseClasses/BaseView';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-registration',
@@ -9,10 +11,10 @@ import { InputPassword } from 'src/app/componentClasses/InputPassword';
   styleUrls: ['./registration.component.css'],
   providers: [UserRegisterService]
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent extends BaseView implements OnInit {
 
-  constructor(service: UserRegisterService) {
-
+  constructor(private service: UserRegisterService) {
+    super();
   }
 
   public emailInput: InputText = {
@@ -31,7 +33,21 @@ export class RegistrationComponent implements OnInit {
   };
 
   public onRegisterClick(): void {
-    
+
+    // there is should be validation!!!
+
+    const user: User = {
+      email: this.emailInput.value,
+      password: this.passwordInput.value
+    };
+
+    this.subscriptions.add(
+      this.service.register(user)
+      //   .subscribe(
+      //     response => {},
+      //     error => {console.log(error)}
+      // )
+    );
   }
 
   ngOnInit() {
