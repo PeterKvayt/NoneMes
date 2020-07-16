@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { InputPassword } from 'src/app/component-elements/InputPassword';
+import { InputPassword } from 'src/app/componentClasses/InputPassword';
 
 @Component({
   selector: 'app-input-password',

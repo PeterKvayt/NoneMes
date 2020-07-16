@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavMenuItem } from 'src/app/component-elements/NavMenuItem';
-import { Message } from 'src/app/component-elements/Messsage';
+import { NavMenuItem } from 'src/app/componentClasses/NavMenuItem';
+import { Message } from 'src/app/componentClasses/Messsage';
 
 @Component({
   selector: 'app-conversation',

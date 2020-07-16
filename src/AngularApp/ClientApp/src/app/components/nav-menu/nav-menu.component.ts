@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavMenuItem } from 'src/app/component-elements/NavMenuItem';
+import { NavMenuItem } from 'src/app/componentClasses/NavMenuItem';
 
 @Component({
   selector: 'app-nav-menu',

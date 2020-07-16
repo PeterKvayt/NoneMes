@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { InputText } from 'src/app/component-elements/InputText';
+import { InputText } from 'src/app/componentClasses/InputText';
+import { InputPassword } from 'src/app/componentClasses/InputPassword';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
     errorText: 'Invalid login.'
   };
 
-  public passwordInput: InputText = {
+  public passwordInput: InputPassword = {
     label: 'Password',
     errorText: 'Invalid password.'
   };

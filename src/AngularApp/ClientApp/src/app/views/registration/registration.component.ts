@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { InputText } from 'src/app/component-elements/InputText';
+import { InputText } from 'src/app/componentClasses/InputText';
 import { UserRegisterService } from 'src/app/services/UserRegisterService';
-import { InputPassword } from 'src/app/component-elements/InputPassword';
+import { InputPassword } from 'src/app/componentClasses/InputPassword';
 
 @Component({
   selector: 'app-registration',
@@ -20,11 +20,6 @@ export class RegistrationComponent implements OnInit {
     errorText: 'Invalid email.'
   };
 
-  public loginInput: InputText = {
-    label: 'Login',
-    errorText: 'Invalid login.'
-  };
-
   public passwordInput: InputPassword = {
     label: 'Password',
     errorText: 'Invalid password.'
@@ -36,10 +31,7 @@ export class RegistrationComponent implements OnInit {
   };
 
   public onRegisterClick(): void {
-    console.log(this.emailInput.value);
-    console.log(this.loginInput.value);
-    console.log(this.passwordInput.value);
-    console.log(this.repitPasswordInput.value);
+    
   }
 
   ngOnInit() {
