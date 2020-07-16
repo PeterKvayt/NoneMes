@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InputText } from 'src/app/component-elements/InputText';
 import { UserRegisterService } from 'src/app/services/UserRegisterService';
+import { InputPassword } from 'src/app/component-elements/InputPassword';
 
 @Component({
   selector: 'app-registration',
@@ -24,12 +25,12 @@ export class RegistrationComponent implements OnInit {
     errorText: 'Invalid login.'
   };
 
-  public passwordInput: InputText = {
+  public passwordInput: InputPassword = {
     label: 'Password',
     errorText: 'Invalid password.'
   };
 
-  public repitPasswordInput: InputText = {
+  public repitPasswordInput: InputPassword = {
     label: 'Repit password',
     errorText: 'Not match.'
   };
