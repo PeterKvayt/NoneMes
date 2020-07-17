@@ -22,12 +22,27 @@ export class RegistrationComponent extends BaseView implements OnInit {
     errorText: 'Invalid email.'
   };
 
+  public firstNameInput: InputText = {
+    label: 'Name',
+    errorText: 'Invalid name.'
+  };
+
+  public lastNameInput: InputText = {
+    label: 'Last name',
+    errorText: 'Invalid last name.'
+  };
+
+  public patronymicInput: InputText = {
+    label: 'Patronymic',
+    errorText: 'Invalid patronymic.'
+  };
+
   public passwordInput: InputPassword = {
     label: 'Password',
     errorText: 'Invalid password.'
   };
 
-  public repitPasswordInput: InputPassword = {
+  public confirmPasswordInput: InputPassword = {
     label: 'Repit password',
     errorText: 'Not match.'
   };
@@ -38,15 +53,19 @@ export class RegistrationComponent extends BaseView implements OnInit {
 
     const user: User = {
       email: this.emailInput.value,
-      password: this.passwordInput.value
+      firstName: this.firstNameInput.value,
+      lastName: this.lastNameInput.value,
+      patronymic: this.patronymicInput.value === undefined ? '' : this.patronymicInput.value,
+      password: this.passwordInput.value,
+      passwordConfirm: this.confirmPasswordInput.value
     };
 
     this.subscriptions.add(
       this.service.register(user)
-      //   .subscribe(
-      //     response => {},
-      //     error => {console.log(error)}
-      // )
+        .subscribe(
+          response => {console.log('ok'); },
+          error => {console.log(error); }
+      )
     );
   }
 

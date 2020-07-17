@@ -3,12 +3,14 @@ using Core.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace AngularApp.Controllers.Identity
 {
     [ApiController]
-    [Route("api/accounts")]
+    [Route("api/[controller]")]
     public class AccountsController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
@@ -19,7 +21,7 @@ namespace AngularApp.Controllers.Identity
         }
 
         [HttpPost]
-        public async void Register(RegisterViewModel model)
+        public async Task Register(RegisterViewModel model)
         {
             if (model == null)
             {
@@ -43,13 +45,13 @@ namespace AngularApp.Controllers.Identity
                 {
                     var result = await _userManager.CreateAsync(user, model.Password);
 
-                    if (!result.Succeeded)
+                    if (!result.Succeeded || result.Errors.Count() > 0)
                     {
                         // ToDo: log
                         Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     // ToDo: log
                     Response.StatusCode = (int)HttpStatusCode.InternalServerError;

@@ -7,9 +7,15 @@
 
     <app-input-text [(item)]='emailInput'></app-input-text>
 
+    <app-input-text [(item)]='firstNameInput'></app-input-text>
+
+    <app-input-text [(item)]='lastNameInput'></app-input-text>
+
+    <app-input-text [(item)]='patronymicInput'></app-input-text>
+
     <app-input-password [(item)]='passwordInput'></app-input-password>
 
-    <app-input-password [(item)]='repitPasswordInput'></app-input-password>
+    <app-input-password [(item)]='confirmPasswordInput'></app-input-password>
 
     <button (click)='onRegisterClick()' class='btn btn-primary btn-block mt-4'>Register</button>
     <button routerLink='/login' class='btn btn-primary btn-block'>Login</button>
