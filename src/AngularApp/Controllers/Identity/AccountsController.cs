@@ -27,6 +27,7 @@ namespace AngularApp.Controllers.Identity
             {
                 // ToDo: log
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return;
             }
 
             if (ModelState.IsValid)
@@ -51,7 +52,7 @@ namespace AngularApp.Controllers.Identity
                         Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     }
                 }
-                catch (Exception e)
+                catch (Exception exception)
                 {
                     // ToDo: log
                     Response.StatusCode = (int)HttpStatusCode.InternalServerError;
