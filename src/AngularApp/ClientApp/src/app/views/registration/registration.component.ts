@@ -63,8 +63,8 @@ export class RegistrationComponent extends BaseView implements OnInit {
     this.subscriptions.add(
       this.service.register(user)
         .subscribe(
-          response => {console.log('ok'); },
-          error => {console.log(error); }
+          response => { console.log(response); },
+          error => { console.log(error); }
       )
     );
   }

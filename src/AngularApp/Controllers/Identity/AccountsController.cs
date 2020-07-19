@@ -14,10 +14,12 @@ namespace AngularApp.Controllers.Identity
     public class AccountsController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
+        private SignInManager<ApplicationUser> _signInManager;
 
-        public AccountsController(UserManager<ApplicationUser> userManager)
+        public AccountsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [HttpPost]
