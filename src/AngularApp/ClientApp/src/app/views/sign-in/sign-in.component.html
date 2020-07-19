@@ -2,10 +2,10 @@
   <div class="col-lg-4">
 
     <h4 class="title">
-      Login
+      SignIn
     </h4>
 
-    <app-input-text [(item)]='loginInput'></app-input-text>
+    <app-input-text [(item)]='signInInput'></app-input-text>
 
     <app-input-password [(item)]='passwordInput'></app-input-password>
 
@@ -14,7 +14,7 @@
       <input type="checkbox" [(ngModel)]='rememberMe'>
     </p>
 
-    <button routerLink='/login' class='btn btn-primary btn-block mt-4' (click)='onSignInClick()'>SignIn</button>
+    <button routerLink='/signIn' class='btn btn-primary btn-block mt-4' (click)='onSignInClick()'>SignIn</button>
     <button routerLink='/registration' class='btn btn-primary btn-block'>Register</button>
   </div>
 </div>

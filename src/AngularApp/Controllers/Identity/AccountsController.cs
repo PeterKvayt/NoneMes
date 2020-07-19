@@ -67,8 +67,8 @@ namespace AngularApp.Controllers.Identity
             }
         }
 
-        [HttpPost("login")]
-        public async Task Login(LoginViewModel model)
+        [HttpPost("signIn")]
+        public async Task SignIn(SignInViewModel model)
         {
             if (model == null)
             {

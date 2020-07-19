@@ -10,7 +10,7 @@ import { InputTextComponent } from './components/input-text/input-text.component
 
 // Views.
 import { AppComponent } from './app.component';
-import { LoginComponent } from './views/login/login.component';
+import { SignInComponent } from './views/sign-in/sign-in.component';
 import { RegistrationComponent } from './views/registration/registration.component';
 import { MessagesComponent } from './views/messages/messages.component';
 import { ConversationComponent } from './views/conversation/conversation.component';
@@ -20,7 +20,7 @@ import { InputPasswordComponent } from './components/input-password/input-passwo
   declarations: [
     AppComponent,
     NavMenuComponent,
-    LoginComponent,
+    SignInComponent,
     InputTextComponent,
     RegistrationComponent,
     MessagesComponent,
@@ -32,12 +32,12 @@ import { InputPasswordComponent } from './components/input-password/input-passwo
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: LoginComponent, pathMatch: 'full' },
-      { path: 'login', component: LoginComponent, pathMatch: 'full' },
+      { path: '', component: SignInComponent, pathMatch: 'full' },
+      { path: 'signIn', component: SignInComponent, pathMatch: 'full' },
       { path: 'registration', component: RegistrationComponent },
       { path: 'messages', component: MessagesComponent },
       { path: 'conversation', component: ConversationComponent },
-      { path: '**', component: LoginComponent }
+      { path: '**', component: SignInComponent }
     ])
   ],
   providers: [],

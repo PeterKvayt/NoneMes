@@ -2,7 +2,7 @@
 
 namespace AngularApp.ViewModels.Identity
 {
-    public sealed class LoginViewModel
+    public sealed class SignInViewModel
     {
         [Required]
         [DataType(DataType.EmailAddress)]
