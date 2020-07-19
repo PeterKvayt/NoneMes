@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { InputText } from 'src/app/componentClasses/InputText';
-import { UserRegisterService } from 'src/app/services/UserRegisterService';
+import { AccountService } from 'src/app/services/AccountService';
 import { InputPassword } from 'src/app/componentClasses/InputPassword';
 import { BaseView } from 'src/app/BaseClasses/BaseView';
-import { User } from 'src/app/models/User';
+import { RegisterUserModel } from 'src/app/models/User';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
-  providers: [UserRegisterService]
+  providers: [AccountService]
 })
 export class RegistrationComponent extends BaseView implements OnInit {
 
-  constructor(private service: UserRegisterService) {
+  constructor(private service: AccountService) {
     super();
   }
 
@@ -51,7 +51,7 @@ export class RegistrationComponent extends BaseView implements OnInit {
 
     // there is should be validation!!!
 
-    const user: User = {
+    const user: RegisterUserModel = {
       email: this.emailInput.value,
       firstName: this.firstNameInput.value,
       lastName: this.lastNameInput.value,
