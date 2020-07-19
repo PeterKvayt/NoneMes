@@ -3,7 +3,7 @@ import { InputText } from 'src/app/componentClasses/InputText';
 import { AccountService } from 'src/app/services/AccountService';
 import { InputPassword } from 'src/app/componentClasses/InputPassword';
 import { BaseView } from 'src/app/BaseClasses/BaseView';
-import { RegisterUserModel } from 'src/app/models/User';
+import { RegisterUserModel } from 'src/app/models/RegisterUserModel';
 
 @Component({
   selector: 'app-registration',

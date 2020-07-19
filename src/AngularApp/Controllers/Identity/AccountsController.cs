@@ -22,7 +22,7 @@ namespace AngularApp.Controllers.Identity
             _signInManager = signInManager;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task Register(RegisterViewModel model)
         {
             if (model == null)
@@ -63,6 +63,36 @@ namespace AngularApp.Controllers.Identity
             else
             {
                 // ToDo: log
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            }
+        }
+
+        [HttpPost("login")]
+        public async Task Login(LoginViewModel model)
+        {
+            if (model == null)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return;
+            }
+
+            if (ModelState.IsValid)
+            {
+                bool lockoutIfFailureSignIn = false;
+
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutIfFailureSignIn);
+
+                if (result.Succeeded)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.OK;
+                }
+                else
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                }
+            }
+            else
+            {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
             }
         }

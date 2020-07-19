@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RegisterUserModel } from '../models/RegisterUserModel';
+import { SignInUserModel } from '../models/SignInUserModel';
 
 @Injectable()
 export class AccountService {
@@ -14,7 +15,7 @@ export class AccountService {
     return this.httpClient.post(this.host + 'register', model, {headers});
   }
 
-  public signIn(model: RegisterUserModel) {
+  public signIn(model: SignInUserModel) {
     const headers = { 'content-type': 'application/json'};
     return this.httpClient.post(this.host + 'login', model, {headers});
   }
