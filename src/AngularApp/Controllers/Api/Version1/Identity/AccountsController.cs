@@ -7,10 +7,10 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace AngularApp.Controllers.Identity
+namespace AngularApp.Controllers.Api.Version1.Identity
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class AccountsController : Controller
     {
         private UserManager<ApplicationUser> _userManager;

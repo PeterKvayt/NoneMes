@@ -8,7 +8,7 @@ export class AccountService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private host = 'https://localhost:44347/api/accounts/';
+  private host = 'https://localhost:44347/api/v1/accounts/';
 
   public register(model: RegisterUserModel) {
     const headers = { 'content-type': 'application/json'};
