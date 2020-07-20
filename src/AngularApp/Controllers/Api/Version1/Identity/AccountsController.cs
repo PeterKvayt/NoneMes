@@ -23,6 +23,7 @@ namespace AngularApp.Controllers.Api.Version1.Identity
         }
 
         [HttpPost("register")]
+        //[ValidateAntiForgeryToken]
         public async Task Register(RegisterViewModel model)
         {
             if (model == null)
@@ -68,6 +69,7 @@ namespace AngularApp.Controllers.Api.Version1.Identity
         }
 
         [HttpPost("signIn")]
+        //[ValidateAntiForgeryToken]
         public async Task SignIn(SignInViewModel model)
         {
             if (model == null)
@@ -94,6 +96,22 @@ namespace AngularApp.Controllers.Api.Version1.Identity
             else
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            }
+        }
+
+        [HttpDelete("signOut")]
+        //[ValidateAntiForgeryToken]
+        public async Task Logout()
+        {
+            try
+            {
+                // ToDo: log
+                await _signInManager.SignOutAsync();
+            }
+            catch (Exception exception)
+            {
+                // ToDo: exception
+                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }
         }
     }

@@ -1,12 +1,38 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { NavMenuItem } from 'src/app/componentClasses/NavMenuItem';
+import { Subscription } from 'rxjs';
+import { AccountService } from 'src/app/services/AccountService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
-  styleUrls: ['./nav-menu.component.css']
+  styleUrls: ['./nav-menu.component.css'],
+  providers: [AccountService]
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnDestroy {
   
   @Input() items: NavMenuItem[];
+
+  constructor(
+    private service: AccountService,
+    private router: Router) {
+
+  }
+
+  private subscriptions = new Subscription();
+
+  public onSignOutClick(): void {
+    console.log('signout');
+    this.subscriptions.add(
+      this.service.signOut().subscribe(
+        response => { this.router.navigate(['signIn']); },
+        error => { console.log(error); }
+      )
+    );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 }

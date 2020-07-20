@@ -19,4 +19,8 @@ export class AccountService {
     const headers = { 'content-type': 'application/json'};
     return this.httpClient.post(this.host + 'signIn', model, {headers});
   }
+
+  public signOut() {
+    return this.httpClient.delete(this.host + 'signOut');
+  }
 }

@@ -1,5 +1,10 @@
 <nav class="nav-box">
+
     <ng-container *ngFor='let item of items'>
-    <a class="nav-item" [href]='item.reference'>{{item.value}}</a>
+        <span *ngIf='item.value === "Sign out"; else otherItems' (click)='onSignOutClick()' class="nav-item">{{item.value}}</span>
+
+        <ng-template #otherItems>
+            <span class="nav-item">{{item.value}}</span>
+        </ng-template>
     </ng-container>
 </nav>

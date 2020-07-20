@@ -17,7 +17,7 @@ export class MessagesComponent extends BaseView implements OnInit {
    }
 
   public navItems = [
-    new NavMenuItem('Logout', '#')
+    new NavMenuItem('Sign out', '#')
   ];
 
   // Mock elements.
