@@ -4,6 +4,7 @@ import { AccountService } from 'src/app/services/AccountService';
 import { InputPassword } from 'src/app/componentClasses/InputPassword';
 import { BaseView } from 'src/app/BaseClasses/BaseView';
 import { RegisterUserModel } from 'src/app/models/RegisterUserModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -13,8 +14,10 @@ import { RegisterUserModel } from 'src/app/models/RegisterUserModel';
 })
 export class RegistrationComponent extends BaseView implements OnInit {
 
-  constructor(private service: AccountService) {
-    super();
+  constructor(
+    private service: AccountService,
+    public router: Router) {
+    super(router);
   }
 
   public emailInput: InputText = {

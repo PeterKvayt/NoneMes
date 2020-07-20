@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { NavMenuItem } from 'src/app/componentClasses/NavMenuItem';
 import { ConversationItem } from 'src/app/componentClasses/ConversationItem';
+import { BaseView } from 'src/app/BaseClasses/BaseView';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css']
 })
-export class MessagesComponent implements OnInit {
+export class MessagesComponent extends BaseView implements OnInit {
 
-  constructor() { }
+  constructor(
+    public router: Router) {
+    super(router);
+   }
 
   public navItems = [
     new NavMenuItem('Logout', '#')

@@ -4,6 +4,7 @@ import { InputPassword } from 'src/app/componentClasses/InputPassword';
 import { BaseView } from 'src/app/BaseClasses/BaseView';
 import { AccountService } from 'src/app/services/AccountService';
 import { SignInUserModel } from 'src/app/models/SignInUserModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,10 @@ import { SignInUserModel } from 'src/app/models/SignInUserModel';
 })
 export class SignInComponent extends BaseView implements OnInit {
 
-  constructor(private service: AccountService) {
-    super();
+  constructor(
+    private service: AccountService,
+    public router: Router) {
+    super(router);
   }
 
   public signInInput: InputText = {
@@ -45,7 +48,7 @@ export class SignInComponent extends BaseView implements OnInit {
 
     this.subscriptions.add(
       this.service.signIn(user).subscribe(
-        response => { console.log(response); },
+        response => { this.redirect('messages'); },
         error => { console.log(error); }
       )
     );
