@@ -1,9 +1,10 @@
 ﻿using Core.Entities;
+using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
-   public class ApplicationContext : DbContext
+   public class ApplicationContext : DbContext, IAppRepository
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
            : base(options)
