@@ -104,7 +104,7 @@ namespace AngularApp.Controllers.Api.Version1.Identity
         public async Task Logout()
         {
             try
-            {
+                {
                 // ToDo: log
                 await _signInManager.SignOutAsync();
             }

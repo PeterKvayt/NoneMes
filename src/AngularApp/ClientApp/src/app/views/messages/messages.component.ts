@@ -3,6 +3,7 @@ import { NavMenuItem } from 'src/app/componentClasses/NavMenuItem';
 import { ConversationItem } from 'src/app/componentClasses/ConversationItem';
 import { BaseView } from 'src/app/BaseClasses/BaseView';
 import { Router } from '@angular/router';
+import { InputText } from 'src/app/componentClasses/InputText';
 
 @Component({
   selector: 'app-messages',
@@ -27,6 +28,11 @@ export class MessagesComponent extends BaseView implements OnInit {
     new ConversationItem('John Doe 3', '3'),
     new ConversationItem('John Doe 4', '4'),
   ];
+
+  public searchInput: InputText = {
+    label: 'Search email',
+    errorText: 'Error.'
+  };
 
   ngOnInit() {
   }

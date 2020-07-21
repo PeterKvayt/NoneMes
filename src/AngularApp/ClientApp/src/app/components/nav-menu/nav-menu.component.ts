@@ -23,7 +23,6 @@ export class NavMenuComponent implements OnDestroy {
   private subscriptions = new Subscription();
 
   public onSignOutClick(): void {
-    console.log('signout');
     this.subscriptions.add(
       this.service.signOut().subscribe(
         response => { this.router.navigate(['signIn']); },
