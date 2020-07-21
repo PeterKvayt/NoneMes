@@ -1,4 +1,4 @@
-﻿using AngularApp.ViewModels.Identity;
+﻿using Core.ViewModels.Identity;
 using Core.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
