@@ -1,4 +1,6 @@
 using Core.Identity;
+using Core.Interfaces;
+using Core.Services;
 using Infrastructure.Data;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +28,7 @@ namespace AngularApp
         {
             #region Issue when startup knows about Infrastructure
 
-            services.AddDbContext<ApplicationContext>(options =>
+            services.AddDbContext<IAppRepository, ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("CatalogConnection")));
 
             services.AddDbContext<IdentityContext>(options =>
@@ -54,6 +56,8 @@ namespace AngularApp
             services.AddAuthorization();
 
             services.AddControllers();
+
+            services.AddTransient<IMessageService, MessageService>();
 
             services.AddSpaStaticFiles(configuration =>
             {

@@ -14,7 +14,7 @@ namespace AngularApp.Controllers.Api.Version1
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class MessagesController : Controller
     {
         private UserManager<ApplicationUser> _userManager;

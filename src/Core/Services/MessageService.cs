@@ -1,6 +1,8 @@
-﻿using Core.Identity;
+﻿using Core.Entities;
+using Core.Identity;
 using Core.Interfaces;
 using Core.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,26 +10,22 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
-    class MessageService : IMessageService
+    public sealed class MessageService : IMessageService
     {
         private IAppRepository _appRepository;
-        private IIdentityRepository _identityRepository;
+        private UserManager<ApplicationUser> _userManager;
 
-        public MessageService(IAppRepository appRepository, IIdentityRepository identityRepository)
+        public MessageService(IAppRepository appRepository, UserManager<ApplicationUser> userManager)
         {
             _appRepository = appRepository;
-            _identityRepository = identityRepository;
+            _userManager = userManager;
         }
 
         public List<ConversationViewModel> GetConversations(ApplicationUser currentUser)
         {
             try
             {
-                // Looking for all conversations.
-                var recipients = _appRepository.MessageRecipients.GroupBy(user => user.UserId).Where(id => id.Key == currentUser.Id).Select(id => id.Key).ToList();
-                var messengers = _appRepository.Messages.GroupBy(message => message.FromUserId).Where(id => id.Key == currentUser.Id).Select(id => id.Key).ToList();
-
-                var result = recipients.Union(messengers);
+                var result = GetAllLinkedMessages(currentUser.Id).Distinct();
 
                 return ToConversationViewModel(result);
             }
@@ -43,13 +41,55 @@ namespace Core.Services
             return await Task.Run(() => GetConversations(currentUser));
         }
 
+        /// <summary>
+        /// Return all messages, wich linked with user.
+        /// </summary>
+        /// <param name="currentUserId">Currnet user id.</param>
+        /// <returns></returns>
+        private IEnumerable<string> GetAllLinkedMessages(string currentUserId)
+        {
+            var idCollection = new List<string> { };
+
+            foreach (var message in _appRepository.Messages)
+            {
+                MessageRecipient recipient = null;
+                try
+                {
+                    recipient = _appRepository.MessageRecipients.FirstOrDefault(recipient => recipient.MessageId == message.Id);
+                }
+                catch (Exception exception)
+                {
+                    // ToDo: exception
+                    throw;
+                }
+
+                if (recipient != null)
+                {
+                    if (message.FromUserId == currentUserId )
+                    {
+                        idCollection.Add(recipient.UserId);
+                    }
+                    else
+                    {
+                        idCollection.Add(message.FromUserId);
+                    }
+                }
+                else
+                {
+                    // ToDo: log
+                }
+            }
+
+            return idCollection;
+        }
+
         private List<ConversationViewModel> ToConversationViewModel(IEnumerable<string> userIds)
         {
             var resultCollection = new List<ConversationViewModel> { };
 
             foreach (var userId in userIds)
             {
-                var user = _identityRepository.Users.FirstOrDefault(user => user.Id == userId);
+                var user = _userManager.Users.FirstOrDefault(user => user.Id == userId);
                 if (user != null)
                 {
                     var userName = user.Lastname + " " + user.Firstname;
