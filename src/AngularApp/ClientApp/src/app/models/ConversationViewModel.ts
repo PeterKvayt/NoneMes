@@ -1,4 +1,4 @@
-export class ConversationItem {
+export class ConversationViewModel {
 
   constructor(userName: string, userId: string) {
     this.userName = userName;
