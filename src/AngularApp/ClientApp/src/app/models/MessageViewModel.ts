@@ -1,13 +1,13 @@
 export class MessageViewModel {
-  constructor(text: string, time: string, owner: boolean) {
-    this.text = text;
-    this.time = time;
+  constructor(context: string, dateSent: string, owner: boolean) {
+    this.context = context;
+    this.dateSent = dateSent;
     this.owner = owner;
   }
 
-  public text: string;
+  public context: string;
   
-  public time: string;
+  public dateSent: string;
   
   public owner: boolean;
 }

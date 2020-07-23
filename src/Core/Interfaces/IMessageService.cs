@@ -12,5 +12,9 @@ namespace Core.Interfaces
         List<ConversationViewModel> GetConversations(ApplicationUser currentUser);
 
         Task<List<ConversationViewModel>> GetConversationsAsync(ApplicationUser currentUser);
+
+        Task<IEnumerable<MessageViewModel>> GetConversationMessagesAsync(string currentUserId, string participantId);
+
+        IEnumerable<MessageViewModel> GetConversationMessages(string currentUserId, string participantId);
     }
 }

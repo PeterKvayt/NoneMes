@@ -5,11 +5,10 @@ namespace Core.ViewModels
 {
     public sealed class MessageViewModel
     {
-        public int Id { get; set; }
-        public string FromUserId { get; set; }
+        public bool Owner { get; set; }
         public DateTime DateSent { get; set; }
-        public DateTime DateRead { get; set; }
-        [MinLength(1)]
+
+        [Required]
         public string Context { get; set; }
     }
 }

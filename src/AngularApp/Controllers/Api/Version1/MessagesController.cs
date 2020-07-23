@@ -9,6 +9,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Core.Interfaces;
+using System;
 
 namespace AngularApp.Controllers.Api.Version1
 {
@@ -27,16 +28,23 @@ namespace AngularApp.Controllers.Api.Version1
         }
 
         [HttpGet]
-        public async Task<List<ConversationViewModel>> GetAllConversations()
+        public async Task<IEnumerable<ConversationViewModel>> GetAllConversations()
         {
             if (User.Identity.IsAuthenticated)
             {
-                var currentEmail = User.FindFirst(ClaimTypes.Name).Value;
-                var currentUser = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
+                var currentUser = GetCurrentAuthenticatedUser();
 
                 if (currentUser != null)
                 {
-                    return await _messageService.GetConversationsAsync(currentUser);
+                    try
+                    {
+                        return await _messageService.GetConversationsAsync(currentUser);
+                    }
+                    catch (Exception exception)
+                    {
+                        // ToDo: exception
+                        throw;
+                    }
                 }
                 else
                 {
@@ -49,6 +57,50 @@ namespace AngularApp.Controllers.Api.Version1
                 Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 return null;
             }
+        }
+
+        [HttpGet("{participantId}")]
+        public async Task<IEnumerable<MessageViewModel>> GetConversationMessages(string participantId)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var currentUser = GetCurrentAuthenticatedUser();
+
+                if (currentUser != null)
+                {
+                    try
+                    {
+                        return await _messageService.GetConversationMessagesAsync(currentUser.Id, participantId);
+                    }
+                    catch (Exception exception)
+                    {
+                        // ToDo: exception
+                        throw;
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    return null;
+                }
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Returns current authenticated user.
+        /// </summary>
+        /// <returns></returns>
+        private ApplicationUser GetCurrentAuthenticatedUser()
+        {
+            var currentEmail = User.FindFirst(ClaimTypes.Name).Value;
+            var currentUser = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
+
+            return currentUser;
         }
     }
 }

@@ -13,6 +13,7 @@ export class MessageService {
   }
 
   public getConversationMessages(participantId: string) {
+    console.log(participantId);
     return this.httpClient.get(this.host + '/' + participantId);
   }
 }
