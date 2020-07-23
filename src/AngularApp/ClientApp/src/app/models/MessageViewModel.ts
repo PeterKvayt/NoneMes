@@ -1,4 +1,4 @@
-export class Message{
+export class MessageViewModel {
   constructor(text: string, time: string, owner: boolean) {
     this.text = text;
     this.time = time;
