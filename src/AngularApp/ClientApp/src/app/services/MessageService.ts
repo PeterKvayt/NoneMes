@@ -11,4 +11,8 @@ export class MessageService {
   public getAllConversations() {
     return this.httpClient.get(this.host);
   }
+
+  public getConversationMessages(participantId: string) {
+    return this.httpClient.get(this.host + '/' + participantId);
+  }
 }

@@ -33,18 +33,22 @@ export class MessagesComponent extends BaseView implements OnInit {
     this.getConversations();
   }
 
-  public messageItems: ConversationViewModel[];
+  public conversations: ConversationViewModel[];
 
   private getConversations(): void {
     this.subscriptions.add(
       this.service.getAllConversations().subscribe(
         (response: ConversationViewModel[]) => { 
-          this.messageItems = response; 
+          this.conversations = response; 
           console.log(response);
         },
         error => { console.log(error); }
       )
     );
+  }
+
+  public onConversationClick(conversation: ConversationViewModel): void {
+    this.redirect('conversation/' + conversation.userId);
   }
 
 }

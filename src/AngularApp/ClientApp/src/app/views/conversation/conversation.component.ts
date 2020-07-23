@@ -2,17 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { NavMenuItem } from 'src/app/componentClasses/NavMenuItem';
 import { Message } from 'src/app/componentClasses/Messsage';
 import { BaseView } from 'src/app/BaseClasses/BaseView';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MessageService } from 'src/app/services/MessageService';
 
 @Component({
   selector: 'app-conversation',
   templateUrl: './conversation.component.html',
-  styleUrls: ['./conversation.component.css']
+  styleUrls: ['./conversation.component.css'],
+  providers: [MessageService]
 })
 export class ConversationComponent extends BaseView implements OnInit {
 
   constructor(
-    public router: Router) {
+    public router: Router,
+    private activeRoute: ActivatedRoute,
+    private service: MessageService) {
     super(router);
   }
 
@@ -21,14 +25,27 @@ export class ConversationComponent extends BaseView implements OnInit {
     new NavMenuItem('Logout', '#'),
   ];
 
-  // Mock messages: should be sort by date and time,
-  // true means own messages, false - companion.
-  public messages = [
-    new Message('Hello world', '11:25', true),
-    new Message('Hello idiot', '11:28', false),
-  ];
-
+  public messages: Message[];
+    
   ngOnInit() {
+    this.subscriptions.add(
+      this.activeRoute.params.subscribe(
+        params => {
+          const id = params['id'];
+          this.GetConversation(id);
+        },
+        error => { console.log(error); }
+      )
+    );
+  }
+
+  private GetConversation(participantId: string): void {
+    this.subscriptions.add(
+      this.service.getConversationMessages(participantId).subscribe(
+        (response: Message[]) => { this.messages = response; },
+        error => { console.log(error); }
+      )
+    );
   }
 
 }

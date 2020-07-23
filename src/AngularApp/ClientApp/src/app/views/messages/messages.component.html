@@ -7,8 +7,8 @@
     <app-input-text [(item)]='searchInput'></app-input-text>
 
     <h5 class="title mb-4">Messages</h5>
-    <ng-container *ngFor='let conversation of messageItems'>
-      <div [routerLink]='conversation.reference' class="conversation-box">
+    <ng-container *ngFor='let conversation of conversations'>
+      <div (click)='onConversationClick(conversation)' class="conversation-box">
         {{conversation.userName}}
       </div>
     </ng-container>

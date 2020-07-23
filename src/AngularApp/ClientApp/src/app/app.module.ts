@@ -36,7 +36,7 @@ import { InputPasswordComponent } from './components/input-password/input-passwo
       { path: 'signIn', component: SignInComponent, pathMatch: 'full' },
       { path: 'registration', component: RegistrationComponent },
       { path: 'messages', component: MessagesComponent },
-      { path: 'conversation', component: ConversationComponent },
+      { path: 'conversation/:id', component: ConversationComponent },
       { path: '**', component: SignInComponent }
     ])
   ],
