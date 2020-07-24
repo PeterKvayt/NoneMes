@@ -23,7 +23,7 @@ export class ConversationComponent extends BaseView implements OnInit {
 
   public navItems = [
     new NavMenuItem('Messages', 'messages'),
-    new NavMenuItem('Logout', '#'),
+    new NavMenuItem('Sign out', '#'),
   ];
 
   public messages: MessageViewModel[];
