@@ -62,6 +62,12 @@ namespace AngularApp.Controllers.Api.Version1
         [HttpGet("{participantId}")]
         public async Task<IEnumerable<MessageViewModel>> GetConversationMessages(string participantId)
         {
+            if (string.IsNullOrEmpty(participantId) || string.IsNullOrWhiteSpace(participantId))
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return;
+            }
+
             if (User.Identity.IsAuthenticated)
             {
                 var currentUser = GetCurrentAuthenticatedUser();
@@ -91,6 +97,41 @@ namespace AngularApp.Controllers.Api.Version1
             }
         }
 
+        [HttpPost]
+        public async Task SendMessage(SendMessageViewModel message)
+        {
+            if (message == null)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return;
+            }
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var currentUser = GetCurrentAuthenticatedUser();
+
+                if (currentUser != null)
+                {
+                    try
+                    {
+                        await _messageService.AddMessageAsync(message, currentUser);
+                    }
+                    catch (Exception exception)
+                    {
+                        // ToDo: exception
+                        throw;
+                    }
+                }
+                else
+                {
+                    Response.StatusCode = (int)HttpStatusCode.NotFound;
+                }
+            }
+            else
+            {
+                Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            }
+        }
         /// <summary>
         /// Returns current authenticated user.
         /// </summary>

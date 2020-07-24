@@ -16,5 +16,9 @@ namespace Core.Interfaces
         Task<IEnumerable<MessageViewModel>> GetConversationMessagesAsync(string currentUserId, string participantId);
 
         IEnumerable<MessageViewModel> GetConversationMessages(string currentUserId, string participantId);
+
+        Task AddMessageAsync(SendMessageViewModel message, ApplicationUser currentUser);
+
+        void AddMessage(SendMessageViewModel message, ApplicationUser currentUser);
     }
 }

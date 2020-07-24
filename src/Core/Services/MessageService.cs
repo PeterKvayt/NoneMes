@@ -185,5 +185,48 @@ namespace Core.Services
 
             return resultCollection;
         }
+
+        public async Task AddMessageAsync(SendMessageViewModel message, ApplicationUser currentUser)
+        {
+            await Task.Run(() => AddMessage(message, currentUser));
+        }
+
+        public void AddMessage(SendMessageViewModel newMessage, ApplicationUser currentUser)
+        {
+            var message = new Message
+            {
+                FromUserId = currentUser.Id,
+                DateSent = newMessage.DateSent,
+                Context = newMessage.Context
+            };
+            try
+            {
+                _appRepository.Messages.Add(message);
+                _appRepository.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+                // ToDo: exception
+                throw;
+            }
+
+            var recipient = new MessageRecipient
+            {
+                UserId = newMessage.RecipientUserId,
+                MessageId = message.Id
+
+            };
+            try
+            {
+                _appRepository.MessageRecipients.Add(recipient);
+
+                _appRepository.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+                // ToDo: exception
+                throw;
+            }
+        }
     }
 }

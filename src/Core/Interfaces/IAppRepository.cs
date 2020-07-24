@@ -1,8 +1,5 @@
 ﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Core.Interfaces
 {
@@ -11,5 +8,7 @@ namespace Core.Interfaces
         DbSet<Message> Messages { get; set; }
 
         DbSet<MessageRecipient> MessageRecipients { get; set; }
+
+        int SaveChanges();
     }
 }

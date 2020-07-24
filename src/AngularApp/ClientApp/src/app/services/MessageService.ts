@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { SendMessageViewModel } from '../models/SendMessageViewModel';
 
 @Injectable()
 export class MessageService {
@@ -13,7 +14,12 @@ export class MessageService {
   }
 
   public getConversationMessages(participantId: string) {
-    console.log(participantId);
     return this.httpClient.get(this.host + '/' + participantId);
+  }
+
+  public sendMessage(message: SendMessageViewModel) {
+    const headers = { 'content-type': 'application/json'};
+    return this.httpClient.post(this.host, message, {headers});
+
   }
 }
