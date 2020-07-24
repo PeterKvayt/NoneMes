@@ -63,7 +63,7 @@ export class ConversationComponent extends BaseView implements OnInit {
       this.service.sendMessage(message).subscribe(
         response => { 
           console.log(response);
-          this.messages.push(new MessageViewModel(message.context, message.dateSent, true)); },
+          this.messages.push(new MessageViewModel(message.context, message.dateSent.toString(), true)); },
         error => { console.log(error); }
       )
     );

@@ -65,7 +65,7 @@ namespace AngularApp.Controllers.Api.Version1
             if (string.IsNullOrEmpty(participantId) || string.IsNullOrWhiteSpace(participantId))
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return;
+                return null;
             }
 
             if (User.Identity.IsAuthenticated)
