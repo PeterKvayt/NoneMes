@@ -3,7 +3,6 @@ import { NavMenuItem } from 'src/app/componentClasses/NavMenuItem';
 import { ConversationViewModel } from 'src/app/models/ConversationViewModel';
 import { BaseView } from 'src/app/BaseClasses/BaseView';
 import { Router } from '@angular/router';
-import { InputText } from 'src/app/componentClasses/InputText';
 import { MessageService } from 'src/app/services/MessageService';
 
 @Component({
