@@ -1,8 +1,6 @@
 ﻿using Core.Identity;
 using Core.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Interfaces
@@ -20,5 +18,9 @@ namespace Core.Interfaces
         Task AddMessageAsync(SendMessageViewModel message, ApplicationUser currentUser);
 
         void AddMessage(SendMessageViewModel message, ApplicationUser currentUser);
+
+        Task<string> GetUserIdFromLoginAsync(string userLogin);
+
+        string GetUserIdFromLogin(string userLogin);
     }
 }

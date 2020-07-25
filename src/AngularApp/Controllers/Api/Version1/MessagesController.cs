@@ -97,6 +97,27 @@ namespace AngularApp.Controllers.Api.Version1
             }
         }
 
+        [HttpGet("getUserId/{userLogin}")]
+        public async Task<string> GetUserIdFromLogin(string userLogin)
+        {
+            if (string.IsNullOrEmpty(userLogin) || string.IsNullOrWhiteSpace(userLogin))
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return null;
+            }
+
+            try
+            {
+                return await _messageService.GetUserIdFromLoginAsync(userLogin);
+            }
+            catch (Exception exception)
+            {
+                // ToDo: exception
+                throw;
+            }
+
+        }
+
         [HttpPost]
         public async Task SendMessage(SendMessageViewModel message)
         {
@@ -132,6 +153,7 @@ namespace AngularApp.Controllers.Api.Version1
                 Response.StatusCode = (int)HttpStatusCode.Unauthorized;
             }
         }
+
         /// <summary>
         /// Returns current authenticated user.
         /// </summary>

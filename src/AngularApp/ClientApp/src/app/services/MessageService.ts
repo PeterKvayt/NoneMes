@@ -20,6 +20,9 @@ export class MessageService {
   public sendMessage(message: SendMessageViewModel) {
     const headers = { 'content-type': 'application/json'};
     return this.httpClient.post(this.host, message, {headers});
+  }
 
+  public getUserIdFromLogin(userLogin: string) {
+    return this.httpClient.get(this.host + '/getUserId/' + userLogin, {responseType: 'text'});
   }
 }

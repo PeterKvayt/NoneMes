@@ -65,13 +65,16 @@ namespace Core.Services
 
                 if (recipient != null)
                 {
-                    if (message.FromUserId == currentUserId )
+                    if (message.FromUserId == currentUserId)
                     {
                         idCollection.Add(recipient.UserId);
                     }
                     else
                     {
-                        idCollection.Add(message.FromUserId);
+                        if (recipient.UserId == currentUserId)
+                        {
+                            idCollection.Add(message.FromUserId);
+                        }
                     }
                 }
                 else
@@ -85,26 +88,6 @@ namespace Core.Services
 
         public IEnumerable<MessageViewModel> GetConversationMessages(string currentUserId, string participantId)
         {
-            var messages = GetAllMessagesOfParticipant(currentUserId, participantId);
-
-            return ToMessageViewModel(messages, currentUserId);
-        }
-
-        public async Task<IEnumerable<MessageViewModel>> GetConversationMessagesAsync(string currentUserId, string participantId)
-        {
-            return await Task.Run(() => GetConversationMessages(currentUserId, participantId));
-        }
-
-        /// <summary>
-        /// Returns all messages of conversation with participant.
-        /// </summary>
-        /// <param name="currentUserId">Current user id.</param>
-        /// <param name="participantId">Participant id.</param>
-        /// <returns></returns>
-        private IEnumerable<Message> GetAllMessagesOfParticipant(string currentUserId, string participantId)
-        {
-            var resultMessageCollection = new List<Message> { };
-
             ApplicationUser participant = null;
             try
             {
@@ -118,27 +101,49 @@ namespace Core.Services
 
             if (participant != null)
             {
-                foreach (var message in _appRepository.Messages)
-                {
-                    var recipient = _appRepository.MessageRecipients.FirstOrDefault(recipient => recipient.MessageId == message.Id);
-
-                    bool isCurrentUserSentMessageToParticipant = message.FromUserId == currentUserId && recipient.UserId == participantId;
-                    bool isParticipantSentMessageToCurrentUser = message.FromUserId == participantId && recipient.UserId == currentUserId;
-
-                    if (isCurrentUserSentMessageToParticipant || isParticipantSentMessageToCurrentUser)
-                    {
-                        resultMessageCollection.Add(message);
-                    }
-                }
+                var messages = GetAllMessagesWithParticipant(currentUserId, participant);
+                return ToMessageViewModel(messages, currentUserId);
             }
             else
             {
-                // ToDo: log
+                // ToDo: exception
+                throw new Exception();
+            }
+
+        }
+
+        public async Task<IEnumerable<MessageViewModel>> GetConversationMessagesAsync(string currentUserId, string participantId)
+        {
+            return await Task.Run(() => GetConversationMessages(currentUserId, participantId));
+        }
+
+        /// <summary>
+        /// Returns all messages of conversation with participant.
+        /// </summary>
+        /// <param name="currentUserId">Current user id.</param>
+        /// <param name="participant">Participant id.</param>
+        /// <returns></returns>
+        private IEnumerable<Message> GetAllMessagesWithParticipant(string currentUserId, ApplicationUser participant)
+        {
+            var resultMessageCollection = new List<Message> { };
+
+            foreach (var message in _appRepository.Messages)
+            {
+                var recipient = _appRepository.MessageRecipients.FirstOrDefault(recipient => recipient.MessageId == message.Id);
+
+                bool isCurrentUserSentMessageToParticipant = message.FromUserId == currentUserId && recipient.UserId == participant.Id;
+                bool isParticipantSentMessageToCurrentUser = message.FromUserId == participant.Id && recipient.UserId == currentUserId;
+
+                if (isCurrentUserSentMessageToParticipant || isParticipantSentMessageToCurrentUser)
+                {
+                    resultMessageCollection.Add(message);
+                }
             }
 
             return resultMessageCollection;
         }
 
+        // ToDo: Replace to converter.
         private List<ConversationViewModel> ToConversationViewModel(IEnumerable<string> userIds)
         {
             var resultCollection = new List<ConversationViewModel> { };
@@ -167,6 +172,7 @@ namespace Core.Services
             return resultCollection;
         }
 
+        // ToDo: Replace to converter.
         private IEnumerable<MessageViewModel> ToMessageViewModel(IEnumerable<Message> messages, string currentUserId)
         {
             var resultCollection = new List<MessageViewModel> { };
@@ -227,6 +233,16 @@ namespace Core.Services
                 // ToDo: exception
                 throw;
             }
+        }
+
+        public async Task<string> GetUserIdFromLoginAsync(string userLogin)
+        {
+            return await Task.Run(() => GetUserIdFromLogin(userLogin));
+        }
+
+        public string GetUserIdFromLogin(string userLogin)
+        {
+            return _userManager.Users.FirstOrDefault(user => user.Email == userLogin).Id;
         }
     }
 }

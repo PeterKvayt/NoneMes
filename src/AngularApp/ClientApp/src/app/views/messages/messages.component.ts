@@ -24,10 +24,7 @@ export class MessagesComponent extends BaseView implements OnInit {
     new NavMenuItem('Sign out', '#')
   ];
 
-  public searchInput: InputText = {
-    label: 'Search email',
-    errorText: 'Error.'
-  };
+  public participantLogin: string;
 
   ngOnInit() {
     this.getConversations();
@@ -51,4 +48,12 @@ export class MessagesComponent extends BaseView implements OnInit {
     this.redirect('conversation/' + conversation.userId);
   }
 
+  public onSearchClick(): void {
+    this.subscriptions.add(
+      this.service.getUserIdFromLogin(this.participantLogin).subscribe(
+        (response: string) => { this.redirect('conversation/' + response); },
+        error => { console.log(error); }
+      )
+    );
+  }
 }
