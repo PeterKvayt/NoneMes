@@ -16,7 +16,6 @@ export class AccountService {
   }
 
   public signIn(model: SignInUserModel) {
-    // const headers = { 'content-type': 'application/json'};
     return this.httpClient.post(this.host + 'signIn', model, {responseType: 'text'});
   }
 }

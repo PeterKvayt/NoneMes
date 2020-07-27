@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Core.Interfaces;
 using System;
+using System.Net.Http.Headers;
 
 namespace AngularApp.Controllers.Api.Version1
 {
@@ -108,6 +109,7 @@ namespace AngularApp.Controllers.Api.Version1
 
             try
             {
+                HttpContext.Response.ContentType = "text";
                 return await _messageService.GetUserIdFromLoginAsync(userLogin);
             }
             catch (Exception exception)
