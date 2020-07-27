@@ -48,7 +48,10 @@ export class SignInComponent extends BaseView implements OnInit {
 
     this.subscriptions.add(
       this.service.signIn(user).subscribe(
-        response => { this.redirect('messages'); },
+        (response: string) => { 
+          console.log(response);
+          localStorage.setItem('token', response);
+          this.redirect('messages'); },
         error => { console.log(error); }
       )
     );

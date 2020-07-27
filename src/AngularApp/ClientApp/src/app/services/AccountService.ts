@@ -16,11 +16,7 @@ export class AccountService {
   }
 
   public signIn(model: SignInUserModel) {
-    const headers = { 'content-type': 'application/json'};
-    return this.httpClient.post(this.host + 'signIn', model, {headers});
-  }
-
-  public signOut() {
-    return this.httpClient.delete(this.host + 'signOut');
+    // const headers = { 'content-type': 'application/json'};
+    return this.httpClient.post(this.host + 'signIn', model, {responseType: 'text'});
   }
 }

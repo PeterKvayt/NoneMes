@@ -1,8 +1,10 @@
+using AngularApp.Controllers.Api.Version1.Identity;
 using Core.Identity;
 using Core.Interfaces;
 using Core.Services;
 using Infrastructure.Data;
 using Infrastructure.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
@@ -12,6 +14,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace AngularApp
 {
@@ -26,15 +30,11 @@ namespace AngularApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            #region Issue when startup knows about Infrastructure
-
             services.AddDbContext<IAppRepository, ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("CatalogConnection")));
 
             services.AddDbContext<IdentityContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
-
-            #endregion
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -55,9 +55,31 @@ namespace AngularApp
 
             services.AddAuthorization();
 
+            services.AddAuthentication(opt => {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+           .AddJwtBearer(options =>
+           {
+               options.TokenValidationParameters = new TokenValidationParameters
+               {
+                   ValidateIssuer = true,
+                   ValidateAudience = true,
+                   ValidateLifetime = true,
+                   ValidateIssuerSigningKey = true,
+
+                   ValidIssuer = "https://localhost:44347",
+                   ValidAudience = "https://localhost:44347",
+                   // ToDo: remove settings to configuration
+                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("DfMrHFBufj[388~F*d}nS7"))
+               };
+           });
+
             services.AddControllers();
 
             services.AddTransient<IMessageService, MessageService>();
+
+            services.AddTransient<IAuthConfigurator, JwtConfigurator>();
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -75,12 +97,6 @@ namespace AngularApp
             {
                 app.UseSpaStaticFiles();
             }
-
-            app.UseCors(s => 
-                s.AllowAnyOrigin()
-                .AllowAnyHeader().
-                AllowAnyMethod()
-            );
 
             app.UseRouting();
 

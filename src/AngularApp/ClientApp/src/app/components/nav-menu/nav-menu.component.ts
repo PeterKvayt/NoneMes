@@ -15,7 +15,6 @@ export class NavMenuComponent implements OnDestroy {
   @Input() items: NavMenuItem[];
 
   constructor(
-    private service: AccountService,
     private router: Router) {
 
   }
@@ -23,12 +22,8 @@ export class NavMenuComponent implements OnDestroy {
   private subscriptions = new Subscription();
 
   public onSignOutClick(): void {
-    this.subscriptions.add(
-      this.service.signOut().subscribe(
-        response => { this.router.navigate(['']); },
-        error => { console.log(error); }
-      )
-    );
+    localStorage.removeItem('token');
+    this.router.navigate(['']);
   }
 
   public ngOnDestroy(): void {

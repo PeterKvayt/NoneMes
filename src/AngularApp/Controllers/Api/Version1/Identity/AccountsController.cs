@@ -15,11 +15,16 @@ namespace AngularApp.Controllers.Api.Version1.Identity
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private IAuthConfigurator _authConfigurator;
 
-        public AccountsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountsController(
+            UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager,
+            IAuthConfigurator authConfigurator)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _authConfigurator = authConfigurator;
         }
 
         [HttpPost("register")]
@@ -70,12 +75,12 @@ namespace AngularApp.Controllers.Api.Version1.Identity
 
         [HttpPost("signIn")]
         //[ValidateAntiForgeryToken]
-        public async Task SignIn(SignInViewModel model)
+        public async Task<IActionResult> SignIn(SignInViewModel model)
         {
             if (model == null)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return;
+                //Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return BadRequest();
             }
 
             if (ModelState.IsValid)
@@ -86,33 +91,37 @@ namespace AngularApp.Controllers.Api.Version1.Identity
 
                 if (result.Succeeded)
                 {
-                    Response.StatusCode = (int)HttpStatusCode.OK;
+                    var token = _authConfigurator.GetToken(model.Email);
+
+                    return Ok(token);
                 }
                 else
                 {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    //Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return BadRequest();
                 }
             }
             else
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                //Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return BadRequest();
             }
         }
 
-        [HttpDelete("signOut")]
+        //[HttpDelete("signOut")]
         //[ValidateAntiForgeryToken]
-        public async Task Logout()
-        {
-            try
-                {
-                // ToDo: log
-                await _signInManager.SignOutAsync();
-            }
-            catch (Exception exception)
-            {
-                // ToDo: exception
-                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            }
-        }
+        //public async Task SignOut()
+        //{
+        //    try
+        //        {
+        //        // ToDo: log
+        //        await _signInManager.SignOutAsync();
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        // ToDo: exception
+        //        Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        //    }
+        //}
     }
 }
