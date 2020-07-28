@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { JwtModule } from '@auth0/angular-jwt';
+
 // Components.
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { InputTextComponent } from './components/input-text/input-text.component';
@@ -15,6 +17,8 @@ import { RegistrationComponent } from './views/registration/registration.compone
 import { MessagesComponent } from './views/messages/messages.component';
 import { ConversationComponent } from './views/conversation/conversation.component';
 import { InputPasswordComponent } from './components/input-password/input-password.component';
+
+import { AuthenticationGuardService } from './services/AuthenticationGuardService';
 
 @NgModule({
   declarations: [
@@ -35,12 +39,18 @@ import { InputPasswordComponent } from './components/input-password/input-passwo
       { path: '', component: SignInComponent, pathMatch: 'full' },
       { path: 'signIn', component: SignInComponent, pathMatch: 'full' },
       { path: 'registration', component: RegistrationComponent },
-      { path: 'messages', component: MessagesComponent },
-      { path: 'conversation/:id', component: ConversationComponent },
+      { path: 'messages', component: MessagesComponent, canActivate: [AuthenticationGuardService] },
+      { path: 'conversation/:id', component: ConversationComponent, canActivate: [AuthenticationGuardService] },
       { path: '**', component: SignInComponent }
-    ])
+    ]),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => sessionStorage.getItem('authToken'),
+      }
+    })
   ],
-  providers: [],
+  providers: [AuthenticationGuardService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
