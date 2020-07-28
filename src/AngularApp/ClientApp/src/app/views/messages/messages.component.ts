@@ -48,11 +48,13 @@ export class MessagesComponent extends BaseView implements OnInit {
   }
 
   public onSearchClick(): void {
-    this.subscriptions.add(
-      this.service.getUserIdFromLogin(this.participantLogin).subscribe(
-        (response: string) => { this.redirect('conversation/' + response); },
-        error => { console.log(error); }
-      )
-    );
+    if (this.participantLogin !== undefined) {
+      this.subscriptions.add(
+        this.service.getUserIdFromLogin(this.participantLogin).subscribe(
+          (response: string) => { this.redirect('conversation/' + response); },
+          error => { console.log(error); }
+        )
+      );
+    }
   }
 }
