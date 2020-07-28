@@ -5,6 +5,7 @@ import { InputPassword } from 'src/app/componentClasses/InputPassword';
 import { BaseView } from 'src/app/BaseClasses/BaseView';
 import { RegisterUserModel } from 'src/app/models/RegisterUserModel';
 import { Router } from '@angular/router';
+import { AuthenticationGuardService } from 'src/app/services/AuthenticationGuardService';
 
 @Component({
   selector: 'app-registration',
@@ -16,7 +17,8 @@ export class RegistrationComponent extends BaseView implements OnInit {
 
   constructor(
     private service: AccountService,
-    public router: Router) {
+    public router: Router,
+    private authService: AuthenticationGuardService) {
     super(router);
   }
 
@@ -73,6 +75,9 @@ export class RegistrationComponent extends BaseView implements OnInit {
   }
 
   ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+    this.redirect('messages');
+    }
   }
 
 }

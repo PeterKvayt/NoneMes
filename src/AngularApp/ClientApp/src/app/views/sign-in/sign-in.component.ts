@@ -5,6 +5,7 @@ import { BaseView } from 'src/app/BaseClasses/BaseView';
 import { AccountService } from 'src/app/services/AccountService';
 import { SignInUserModel } from 'src/app/models/SignInUserModel';
 import { Router } from '@angular/router';
+import { AuthenticationGuardService } from 'src/app/services/AuthenticationGuardService';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class SignInComponent extends BaseView implements OnInit {
 
   constructor(
     private service: AccountService,
-    public router: Router) {
+    public router: Router,
+    private authService: AuthenticationGuardService) {
     super(router);
   }
 
@@ -30,10 +32,12 @@ export class SignInComponent extends BaseView implements OnInit {
     errorText: 'Invalid password.'
   };
 
-  public rememberMe: boolean;
+  public rememberMe = false;
 
   public ngOnInit(): void {
-    this.rememberMe = false;
+    if (this.authService.isAuthenticated()) {
+      this.redirect('messages');
+    }
   }
 
   public onSignInClick(): void {

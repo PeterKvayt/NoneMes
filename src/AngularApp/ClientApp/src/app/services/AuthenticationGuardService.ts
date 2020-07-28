@@ -16,7 +16,7 @@ export class AuthenticationGuardService implements CanActivate {
     }
   }
 
-  private isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     const token = sessionStorage.getItem('authToken');
     if (token !== null) {
       return !this.jwtHelper.isTokenExpired(token);
