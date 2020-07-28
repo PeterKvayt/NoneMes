@@ -22,7 +22,7 @@ export class NavMenuComponent implements OnDestroy {
   private subscriptions = new Subscription();
 
   public onSignOutClick(): void {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('authToken');
     this.router.navigate(['']);
   }
 
