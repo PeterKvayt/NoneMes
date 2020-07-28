@@ -109,7 +109,6 @@ namespace AngularApp.Controllers.Api.Version1
 
             try
             {
-                HttpContext.Response.ContentType = "text";
                 return await _messageService.GetUserIdFromLoginAsync(userLogin);
             }
             catch (Exception exception)
