@@ -28,7 +28,6 @@ namespace AngularApp.Controllers.Api.Version1.Identity
         }
 
         [HttpPost("register")]
-        //[ValidateAntiForgeryToken]
         public async Task Register(RegisterViewModel model)
         {
             if (model == null)
@@ -74,7 +73,6 @@ namespace AngularApp.Controllers.Api.Version1.Identity
         }
 
         [HttpPost("signIn")]
-        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> SignIn(SignInViewModel model)
         {
             if (model == null)

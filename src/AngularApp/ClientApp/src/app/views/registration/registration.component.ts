@@ -54,24 +54,63 @@ export class RegistrationComponent extends BaseView implements OnInit {
 
   public onRegisterClick(): void {
 
-    // there is should be validation!!!
+    if (this.validateRegisterUserModel()) {
+      const user: RegisterUserModel = {
+        email: this.emailInput.value,
+        firstName: this.firstNameInput.value,
+        lastName: this.lastNameInput.value,
+        patronymic: this.patronymicInput.value === undefined ? '' : this.patronymicInput.value,
+        password: this.passwordInput.value,
+        passwordConfirm: this.confirmPasswordInput.value
+      };
+  
+      this.subscriptions.add(
+        this.service.register(user)
+          .subscribe(
+            response => {  },
+            error => { console.log(error); }
+        )
+      );
+    }
+  }
 
-    const user: RegisterUserModel = {
-      email: this.emailInput.value,
-      firstName: this.firstNameInput.value,
-      lastName: this.lastNameInput.value,
-      patronymic: this.patronymicInput.value === undefined ? '' : this.patronymicInput.value,
-      password: this.passwordInput.value,
-      passwordConfirm: this.confirmPasswordInput.value
-    };
+  private validateRegisterUserModel(): boolean {
+    if (!this.emailInput.value) {
+      this.emailInput.valid = false;
+      return false;
+    } else {
+      this.emailInput.valid = true;
+    }
 
-    this.subscriptions.add(
-      this.service.register(user)
-        .subscribe(
-          response => { console.log(response); },
-          error => { console.log(error); }
-      )
-    );
+    if (!this.firstNameInput.value) {
+      this.firstNameInput.valid = false;
+      return false;
+    } else {
+      this.firstNameInput.valid = true;
+    }
+
+    if (!this.lastNameInput.value) {
+      this.lastNameInput.valid = false;
+      return false;
+    } else {
+      this.lastNameInput.valid = true;
+    }
+
+    if (this.passwordInput.value !== undefined && this.passwordInput.value.length >= 6) {
+      this.passwordInput.valid = true;
+    } else {
+      this.passwordInput.valid = false;
+      return false;
+    }
+
+    if (this.confirmPasswordInput.value !== undefined && this.confirmPasswordInput.value === this.passwordInput.value) {
+      this.confirmPasswordInput.valid = true;
+    } else {
+      this.confirmPasswordInput.valid = false;
+      return false;
+    }
+
+    return true;
   }
 
   ngOnInit() {
