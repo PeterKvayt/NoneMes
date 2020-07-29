@@ -4,7 +4,7 @@
         <span *ngIf='item.value === "Sign out"; else otherItems' (click)='onSignOutClick()' class="nav-item">{{item.value}}</span>
 
         <ng-template #otherItems>
-            <span class="nav-item">{{item.value}}</span>
+            <span class="nav-item" [routerLink]='item.reference'>{{item.value}}</span>
         </ng-template>
     </ng-container>
 </nav>
