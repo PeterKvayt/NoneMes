@@ -22,7 +22,7 @@ export class SignInComponent extends BaseView implements OnInit {
     super(router);
   }
 
-  public signInInput: InputText = {
+  public emailInput: InputText = {
     label: 'Email',
     errorText: 'Invalid email.'
   };
@@ -42,21 +42,39 @@ export class SignInComponent extends BaseView implements OnInit {
 
   public onSignInClick(): void {
 
-    // There is should be validation
+    if (this.validateUser()) {
 
-    const user: SignInUserModel = {
-      email: this.signInInput.value,
-      password: this.passwordInput.value,
-      rememberMe: this.rememberMe
-    };
+      const user: SignInUserModel = {
+        email: this.emailInput.value,
+        password: this.passwordInput.value,
+        rememberMe: this.rememberMe
+      };
 
-    this.subscriptions.add(
-      this.service.signIn(user).subscribe(
-        (response: string) => {
-          sessionStorage.setItem('authToken', response);
-          this.redirect('messages'); },
-        error => { console.log(error); }
-      )
-    );
+      this.subscriptions.add(
+        this.service.signIn(user).subscribe(
+          (response: string) => {
+            sessionStorage.setItem('authToken', response);
+            this.redirect('messages');
+          },
+          error => { console.log(error); }
+        )
+      );
+    }
+  }
+
+  private validateUser(): boolean {
+    if (this.emailInput.value) {
+      this.emailInput.valid = true;
+      if (this.passwordInput.value) {
+        this.passwordInput.valid = true;
+        return true;
+      } else {
+        this.passwordInput.errorText = 'Password is empty.';
+        this.passwordInput.valid = false;
+      }
+    } else {
+      this.emailInput.errorText = 'Email is empty.';
+      this.emailInput.valid = false;
+    }
   }
 }
