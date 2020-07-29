@@ -107,21 +107,5 @@ namespace AngularApp.Controllers.Api.Version1.Identity
                 return BadRequest();
             }
         }
-
-        //[HttpDelete("signOut")]
-        //[ValidateAntiForgeryToken]
-        //public async Task SignOut()
-        //{
-        //    try
-        //        {
-        //        // ToDo: log
-        //        await _signInManager.SignOutAsync();
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        // ToDo: exception
-        //        Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-        //    }
-        //}
     }
 }
