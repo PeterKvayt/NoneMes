@@ -63,11 +63,11 @@ export class RegistrationComponent extends BaseView implements OnInit {
         password: this.passwordInput.value,
         passwordConfirm: this.confirmPasswordInput.value
       };
-  
+
       this.subscriptions.add(
         this.service.register(user)
           .subscribe(
-            response => {  },
+            () => { this.redirect(''); },
             error => { console.log(error); }
         )
       );
