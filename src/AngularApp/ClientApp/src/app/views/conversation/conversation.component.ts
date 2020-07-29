@@ -56,13 +56,10 @@ export class ConversationComponent extends BaseView implements OnInit {
   public onSendClick(): void {
 
     const message = new SendMessageViewModel(this.messageContext, this.recipientId);
-    console.log(message);
-    console.log(message.dateSent.toString());
     this.messageContext = '';
     this.subscriptions.add(
       this.service.sendMessage(message).subscribe(
         response => { 
-          console.log(response);
           this.messages.push(new MessageViewModel(message.context, message.dateSent.toString(), true)); },
         error => { console.log(error); }
       )
